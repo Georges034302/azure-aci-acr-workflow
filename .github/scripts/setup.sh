@@ -7,11 +7,11 @@ RESOURCE_GROUP="wordcount-rg"
 ACR_NAME="wordcountacr$(date +%s)"  # Unique ACR name
 LOCATION="australiaeast"
 SP_NAME="github-actions-sp"
-OWNER="Georges034302"
-REPO=$(basename -s .git "$(git config --get remote.origin.url)")
-echo "Current repo name: $REPO"
-REPO=${REPO:-$OWNER/$REPOE}  # Default to current repo if not set
 
+# Ensure the setup-gh-token.sh script is executable and source it
+echo "🔧 Setting up GitHub token and login to GitHub ..."
+chmod u+x .github/scripts/gh_setup.sh
+source .github/scripts/gh_setup.sh
 
 # Azure Login
 echo "🔐 Logging into Azure..."
@@ -101,13 +101,6 @@ echo "✅ 'AcrPush' role assigned."
 # Get ACR credentials
 ACR_USERNAME=$(az acr credential show --name "$ACR_NAME" --query username -o tsv)
 ACR_PASSWORD=$(az acr credential show --name "$ACR_NAME" --query "passwords[0].value" -o tsv)
-
-# Configure GitHub Access with TOKEN (CLI): (Ensure to set the GITHUB_TOKEN environment variable)
-
-# gh auth logout
-# unset GITHUB_TOKEN
-# echo "TOKEN" | gh auth login --with-token
-# gh auth status
 
 # Set GitHub Secrets if authenticated
 if ! command -v gh &> /dev/null; then

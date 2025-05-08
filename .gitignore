@@ -1,6 +1,3 @@
-# Ignore the setup script
-.github/scripts/setup.sh
-
 # General ignores
 *.log
 *.env

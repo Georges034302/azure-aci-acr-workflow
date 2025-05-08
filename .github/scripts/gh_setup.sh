@@ -2,18 +2,22 @@
 
 # --- Config ---
 HOSTNAME="github.com"
+export OWNER=$(gh api user --jq .login)
+echo "GitHub user: $OWNER"
+export REPO=$(basename -s .git "$(git config --get remote.origin.url)")
+echo "Current repo name: $REPO"
+export REPO=${REPO:-$OWNER/$REPOE}  # Default to current repo if not set
 
-# --- Set GH_TOKEN as a Codespaces user-level secret ---
-echo "🔐 Setting GH_TOKEN as a GitHub Codespaces secret..."
-gh secret set GH_TOKEN --user --body "$GH_TOKEN"
-
-# --- Authenticate GitHub CLI with the same token (overrides temporary GH_TOKEN for storage) ---
-echo "🔐 Logging into GitHub CLI with this token..."
-unset GH_TOKEN  # Temporarily remove it so gh will store credentials
+# --- Authenticate GitHub CLI with the token ---
+echo "🔐 Logging into GitHub CLI with the provided token..."
 echo "$GH_TOKEN" | gh auth login --hostname "$HOSTNAME" --with-token
 
 # --- Verify login ---
 echo ""
 gh auth status
+
+# --- Set repository secrets ---
+echo "🔐 Setting repository secrets..."
+gh secret set GH_TOKEN --body "$GH_TOKEN" --repo "$OWNER/$REPO"
 
 echo "✅ GH_TOKEN set and GitHub CLI authenticated successfully."
