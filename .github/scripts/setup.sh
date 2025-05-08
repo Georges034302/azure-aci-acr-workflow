@@ -8,7 +8,9 @@ ACR_NAME="wordcountacr$(date +%s)"  # Unique ACR name
 LOCATION="australiaeast"
 SP_NAME="github-actions-sp"
 OWNER="Georges034302"
-REPO="azure-aci-acr-workflow"
+REPO=$(basename -s .git "$(git config --get remote.origin.url)")
+echo "Current repo name: $REPO"
+REPO=${REPO:-$OWNER/$REPOE}  # Default to current repo if not set
 
 
 # Azure Login
