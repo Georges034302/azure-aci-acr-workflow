@@ -1,6 +1,6 @@
 This is a test file for Python script:
 - GitHub Actions CI/CD 
-- Azure + GitHub (setup.sh & gh_setup.sh- run once)
+- Azure + GitHub (setup.sh & gh_setup.sh)
 - Azure ACI
 - Azure ACR
 - Updates Success
