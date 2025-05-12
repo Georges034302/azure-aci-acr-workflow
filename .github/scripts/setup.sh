@@ -13,9 +13,12 @@ echo "🔧 Setting up GitHub token and login to GitHub ..."
 chmod u+x .github/scripts/gh_setup.sh
 source .github/scripts/gh_setup.sh
 
-# Azure Login
-echo "🔐 Logging into Azure..."
-az login --use-device-code
+if ! az account show &> /dev/null; then
+  echo "🔑 Logging in to Azure using device code..."
+  az login --use-device-code
+else
+  echo "✅ Already logged in to Azure CLI."
+fi
 
 echo "✅ Azure login successful."
 
