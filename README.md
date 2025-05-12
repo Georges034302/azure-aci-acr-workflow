@@ -40,6 +40,57 @@ Dockerfile\
 
 ---
 
-### 🌐 Live App Access (FQDN)
-http://wordcountdemo-14901658158.australiaeast.azurecontainer.io
+### 🚀 Deployment Steps
+
+1. **Fork or Clone the Repository**
+   ```bash
+   git clone https://github.com/<your-username>/azure-aci-acr-workflow.git
+   cd azure-aci-acr-workflow
+   ```
+
+2. **Run Setup Script (One-time)**
+   - Configure Azure resources and GitHub secrets:
+   ```bash
+   ./scripts/setup.sh
+   ```
+
+3. **Push Changes to Trigger CI/CD**
+   - Make changes to `data.txt` or source code, then push:
+   ```bash
+   git add .
+   git commit -m "Your changes"
+   git push
+   ```
+
+4. **How Deployment Works**
+   - The `.github/workflows/deploy.yml` GitHub Actions workflow is triggered on every push.
+   - This workflow:
+     - Builds the Docker image.
+     - Pushes it to Azure Container Registry (ACR).
+     - Runs `.github/scripts/deploy.sh` to deploy the image to Azure Container Instances (ACI).
+   - The `deploy.sh` script handles logging in to ACR, creating/updating the container instance, and passing environment variables.
+
+5. **Monitor GitHub Actions**
+   - Go to the **Actions** tab in your GitHub repo to watch the workflow run.
+
+6. **Access the Live App**
+   - After deployment, visit the FQDN shown below to view the updated app.\
+   ✅ Example Output:\
+   🌐 FQDN: http://wordcountdemo-14901658158.australiaeast.azurecontainer.io
+
+---
+
+### 🧹 Clean Up Azure Resources
+
+To delete all Azure resources created for this project, run:
+```bash
+./scripts/cleanup.sh
+```
+This will remove the Azure Container Instance, Container Registry, and Resource Group.
+
+---
+
+### 👨‍💻 Author: Georges Bou Ghantous
+
+This repository demonstrates automated deployment of a Python app to ACI+ACR using GitHub Actions. 💙
 
