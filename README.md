@@ -90,7 +90,4 @@ This will remove the Azure Container Instance, Container Registry, and Resource 
 
 ---
 
-### 👨‍💻 Author: Georges Bou Ghantous
-
-This repository demonstrates automated deployment of a Python app to ACI+ACR using GitHub Actions. 💙
-
+<sub><i><span style="color:#B0B0B0">👤 Author: **Georges Bou Ghantous**</span></i></sub>
