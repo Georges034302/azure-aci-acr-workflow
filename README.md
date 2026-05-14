@@ -90,4 +90,4 @@ This will remove the Azure Container Instance, Container Registry, and Resource 
 
 ---
 
-<sub><i><span style="color:#B0B0B0">👤 Author: **Georges Bou Ghantous**</span></i></sub>
+<sub><i><span style="color:#B0B0B0">👤 Author: Dr. Georges Bou Ghantous</span></i></sub>
